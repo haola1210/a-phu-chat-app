@@ -1,17 +1,27 @@
 import './App.css'
-
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  
+} from "react-router-dom";
 // NOTICE:
 // EXAMPLE IMPORT
-import Example from '@components/Example'
+import Login from '@pages/Login'
 // 
 
 
-function App() {
-  
+function App() { 
 
   return (
     <div className="App">
-      <Example />
+      <BrowserRouter>
+      <Routes>
+        {/* <Route path="/" element={ />} /> */}
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+     
     </div>
   )
 }
