@@ -1,0 +1,25 @@
+.siderbar {
+    height: 100%;    
+
+    flex: 20%;
+    justify-self: center;
+
+    background-color: #eff0d1;
+
+    
+    
+}
+
+.main_siderbar {
+    height: 70%;    
+    overflow-y: scroll;
+
+}
+
+
+@media screen and (max-width = 640px) {
+    .siderbar {
+        flex: 100%;
+    }
+    
+}
