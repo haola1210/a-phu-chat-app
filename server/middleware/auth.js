@@ -16,9 +16,8 @@ export const authenToken = (req, res, next) => {
       if (err) {
         console.log("THis is token", token)
         res.status(403)        
-      };      
-      req.user = req.body;
-      console.log("req.body", data)    
+      };         
+      req.id = data.id;         
 
     });
 
