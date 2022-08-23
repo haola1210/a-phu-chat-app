@@ -8,9 +8,11 @@ import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined'
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useUserContext } from '@contexts/UserContext';
 
-function HeaderSideComponnent() {
+
+function HeaderSideComponnent({valueFind, handleChange, handleFindUser, setValueFind, handleDeleteFind}) { 
     const { userLocal } = useUserContext();
     const  { username, email} = userLocal;
     
@@ -43,9 +45,11 @@ function HeaderSideComponnent() {
         <div className="search">
             <div className="search-form">
                 <SearchIcon />
-                <form >
-                    <input type="text"  placeholder='People, Users, Group'/>
+                <form onSubmit={(e) => handleFindUser(valueFind, e, setValueFind)}>
+                    <input type="text"  placeholder='People, Users, Group' 
+                            value={valueFind} onChange={handleChange}/>
                 </form>
+                <HighlightOffIcon onClick={handleDeleteFind}/>
             </div>            
             <IconButton >
                 <GroupAddOutlinedIcon onClick={() => setCreateGroup(true)}/>
@@ -54,13 +58,13 @@ function HeaderSideComponnent() {
 
         </div>
         <div className="icon">
-            <div className="chat">
+            <div className="chat" onClick={handleDeleteFind}>
                 <IconButton>
                     <ChatBubbleOutlineOutlinedIcon />
                 </IconButton>
                 <p>Chats</p>
             </div>
-            <div className="contacts">
+            <div className="contacts" onClick={handleDeleteFind}>
                 <IconButton>
                     <MenuBookOutlinedIcon />
                 </IconButton>

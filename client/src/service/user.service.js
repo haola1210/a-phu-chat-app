@@ -8,7 +8,7 @@ const API_URL = "http://localhost:8080/";
 
 const instance = axios.create({
   baseURL: API_URL,
-  timeout: 1000,
+  timeout: 10000,
   headers: authHeader()
 });
 
@@ -16,12 +16,30 @@ const getPublicContent = () => {
   return instance.get("all");
 };
 
+const getUsers = (valueFind) => {
+  return instance.get(`api/users`, {params: {content: valueFind}})
+}
+
 const getUser = (id) => {
   return instance.get(`api/users/${id}`)
 }
 
 const getRooms = (id) => {
   return instance.get("api/rooms",{params:{_id: id}})
+}
+
+const findJoinedByUser = (ownerId, memberId) => {
+  return instance.get(`api/users/${ownerId}/${memberId}`)
+
+}
+
+const createOneRoom = (title, _id, member) => {
+  return instance.post("api/rooms",{
+    title: title, 
+    description: "personal", 
+    _id: _id,
+    member: member
+  })
 }
 
 const getOneRoom = (idRoom) => {
@@ -42,10 +60,15 @@ const createChat = (idRoom, content) => {
 
 const UserService = {
   getPublicContent,
+  getUsers,
   getRooms,
   getOneRoom,
+  createOneRoom,
   getChats,
-  createChat
+  createChat,
+  getUser,
+  findJoinedByUser
+  
   
 };
 export default UserService;

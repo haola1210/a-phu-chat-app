@@ -1,18 +1,30 @@
 import React from 'react'
-import HeaderSideComponnent from '@components/HeaderSideComponet'
+import HeaderSider from '@pages/HeaderSider';
 import "./SiderbarComponent.css"
+import Room from '@pages/Room';
 import Contact from '@pages/Contact';
 
-function SiderbarComponent({contact}) {
-  const { contacts, error, success} = contact;
+function SiderbarComponent(props) {
+  const {contact,resultFind,handleFindUser, handleDeleteFind}   = props;  
+  const { contacts, error, success, searching} = contact;
+  
 
   return (
     <div className="siderbar">
-      <HeaderSideComponnent />
+      <HeaderSider handleFindUser={handleFindUser} handleDeleteFind={handleDeleteFind}/>
+      {
+        searching && <div className="main_siderbar">          
+          {resultFind.result.map((value, index) => {
+            return (<Contact value={value} key={index} />)
+          })}
+          {resultFind.error && <div className="chat_found_nothing" >{resultFind.error}</div>}
+
+        </div>
+      }      
       {success && 
         <div className="main_siderbar">        
           {contacts.map((value, index) => {
-            return (<Contact value={value} key={index}/>)       
+            return (<Room value={value} key={index}/>)       
             
 
           })}

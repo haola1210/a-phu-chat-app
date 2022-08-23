@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./EmptyComponent.css"
-import { Avatar} from '@mui/material'; 
+import { Avatar} from '@mui/material';
+import UserService from '../../service/user.service';
+import { useNavigate } from 'react-router-dom';
 
-function EmptyComponent() {
+function EmptyComponent({infoUser, handleGreeting, idRoom}) {
+  
+  const {content} = infoUser;
+  const name = content.profile?.name || content.username;
+  const url = content.profile?.avatar_url || "";
+  const status = content.profile?.status;
+  
+  
   return (
     <div className='empty main'>
-      <h1>Welcome, Phu Nguyen</h1>
+      <h1>Welcome, {name}</h1>
       <div className="avatar">                
-          <Avatar alt="Phu Nguyen" src="https://i.pravatar.cc/150?u=fake@pravatar.com" />
+          <Avatar alt={name} src={url} />
           <div className="username">
-              <h3>Phu Nguyen</h3>
-              <p>In Meeting</p>
+              <h3>{name}</h3>
+              {status && <p>In Meeting</p>}
           </div>
       </div>
-      <button>Start a conversation</button>                
+      <button onClick={handleGreeting}>Start a conversation</button>                
                     
         
     </div>

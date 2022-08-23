@@ -1,12 +1,15 @@
 import { useState } from "react";
 import UserContext from "./UserContext";
+import { useParams } from "react-router-dom";
 
 function UserContextProvider({ children }){
   const data = JSON.parse(localStorage.getItem("user"));
-  let userGlobal;
+
   const user = data?.user || undefined;
-  const token = data?.token || undefined;  
-  user && token ? userGlobal =  user : userGlobal = "";   
+  const token = data?.token || undefined; 
+  let userGlobal;  
+
+  user && token ? userGlobal =  user : userGlobal = "";     
 
   const [userLocal, setUserLocal] = useState({
     ...userGlobal
